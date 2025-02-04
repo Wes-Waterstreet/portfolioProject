@@ -8,6 +8,14 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.02.04]
+
+### Added
+
+- Designed a Football Stats component
+- Designed a Media Ratings component
+- Designed a Music Playlist component
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
