@@ -8,6 +8,13 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.02.20]
+
+### Added
+
+- Designed a proof of concept for MediaRatingsTracker component
+
+
 ## [2025.02.04]
 
 ### Added
