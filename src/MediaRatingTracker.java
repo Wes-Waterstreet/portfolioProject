@@ -66,6 +66,12 @@ public class MediaRatingTracker<K, V> extends Map1L<K, V> {
         return this.rep.value(key);
     }
 
+    /**
+     * Main method.
+     *
+     * @param args
+     *            the command line arguments
+     */
     public static void main(String[] args) {
         MediaRatingTracker<String, Integer> shows = new MediaRatingsTracker1<>();
         shows.add("invincible", 4);
