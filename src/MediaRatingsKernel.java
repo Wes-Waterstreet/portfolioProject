@@ -3,69 +3,71 @@ import components.standard.Standard;
 /**
  * Media ratings kernel component with primary methods.
  *
- * @param <K>
- *            the type of the key entries
- * @param <V>
- *            the type of the value entries
+ * @param <String>
+ *            String entries for media
+ * @param <Integer>
+ *            Integer values for rating
  */
-public interface MediaRatingsKernel<K, V> extends Standard<MediaRatings<K, V>> {
+@SuppressWarnings("hiding")
+public interface MediaRatingsKernel<String, Integer>
+        extends Standard<MediaRatings<String, Integer>> {
     /**
      * A constant, with value 5, holding the max rating allowed.
      */
     int MAXRATING = 5;
 
     /**
-     * Adds the pair ({@code key}, {@code value}) to this.
+     * Adds the pair ({@code media}, {@code rating}) to this.
      *
-     * @param key
+     * @param media
      *            the media to be added
-     * @param value
+     * @param rating
      *            the associated rating to be added
-     * @aliases references {@code key, value}
+     * @aliases references {@code media, rating}
      * @updates this
-     * @requires key is not in DOMAIN(this)
-     * @requires value <= MAXRATING
-     * @ensures this = #this union {(key, value)}
+     * @requires media is not in DOMAIN(this)
+     * @requires rating <= MAXRATING
+     * @ensures this = #this union {(media, rating)}
      */
-    void add(K key, V value);
+    void add(String media, int rating);
 
     /**
-     * Removes the pair whose first component is {@code key} and returns it.
+     * Removes the pair whose first component is {@code media} and returns it.
      *
-     * @param key
+     * @param media
      *            the media to be removed
      * @return the pair removed
      * @updates this
-     * @requires key is in DOMAIN(this)
+     * @requires media is in DOMAIN(this)
      * @ensures <pre>
-     * remove.key = key  and
+     * remove.media = media  and
      * remove is in #this  and
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings.Pair<K, V> remove(K key);
+    MediaRatings.Pair<String, Integer> remove(String media);
 
     /**
-     * Reports the value associated with {@code key} in {@code this}.
+     * Reports the rating associated with {@code media} in {@code this}.
      *
-     * @param key
-     *            the key whose associated value is to be reported
-     * @return the value associated with key
-     * @aliases reference returned by {@code value}
-     * @requires key is in DOMAIN(this)
-     * @ensures (key, value) is in this
+     * @param media
+     *            the media whose associated rating is to be reported
+     * @return the rating associated with the media
+     * @aliases reference returned by {@code rating}
+     * @requires media is in DOMAIN(this)
+     * @ensures (media, rating) is in this
      */
-    V rating(K key);
+    int rating(String media);
 
     /**
-     * Returns if the given key is stored in the media ratings already.
+     * Returns if the given media is stored in the media ratings already.
      *
-     * @param key
+     * @param media
      *            the media to be checked
-     * @return true iff there is a key stored that is the same
-     * @ensures hasKey = (key is in DOMAIN(this))
+     * @return true iff there is a media stored that is the same
+     * @ensures hasMedia = (media is in DOMAIN(this))
      */
-    boolean hasMedia(K key);
+    boolean hasMedia(String media);
 
     /**
      * Returns the number of media ratings saved.

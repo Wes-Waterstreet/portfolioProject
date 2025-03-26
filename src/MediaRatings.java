@@ -1,62 +1,64 @@
 /**
  * MediaRatings secondary methods.
  *
- * @param <K>
- *            the type of the key entries
- * @param <V>
- *            the type of the value entries
+ * @param <String>
+ *            String entries for media
+ * @param <Integer>
+ *            Integer values for rating
  */
-public interface MediaRatings<K, V> extends MediaRatingsKernel<K, V> {
+@SuppressWarnings("hiding")
+public interface MediaRatings<String, Integer>
+        extends MediaRatingsKernel<String, Integer> {
     /**
      * The pair of media and rating for the media ratings tracker.
      *
-     * @param <K>
-     *            the type of the key entries
-     * @param <V>
-     *            the type of the value entries
+     * @param <String>
+     *            String entries for media
+     * @param <Integer>
+     *            Integer values for rating
      * @initially <pre>
-     * (K key, V value):
+     * (String media, Integer rating):
      *  ensures
-     *   this = (key, value)
+     *   this = (media, rating)
      * </pre>
      */
-    interface Pair<K, V> {
+    interface Pair<String, Integer> {
         /**
-         * Returns the key for the pair.
+         * Returns the media for the pair.
          *
-         * @return the key
+         * @return the media
          */
-        K key();
+        String media();
 
         /**
          * Returns the rating for the pair.
          *
          * @return the rating
          */
-        V value();
+        int rating();
     }
 
     /**
      * updates the old rating of the given media with the new rating.
      *
-     * @param key
-     *            the media to be added
-     * @param value
-     *            the associated rating to be added
+     * @param media
+     *            the media to be changed
+     * @param rating
+     *            The new rating
      * @updates this
      *
      */
-    void updateRating(K key, V value);
+    void updateRating(String media, Integer rating);
 
     /**
      * Finds the media with the given rating value and stores it in a new
      * tracker.
      *
-     * @param value
+     * @param rating
      *            the associated rating to be added
      * @return new Media Ratings with only media of the given rating.
      *
      */
-    MediaRatings<K, V> allRatings(V value);
+    MediaRatings<String, Integer> allRatings(int rating);
 
 }
