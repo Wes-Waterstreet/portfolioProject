@@ -48,7 +48,7 @@ public interface MediaRatings<String, Integer>
      * @updates this
      *
      */
-    void updateRating(String media, Integer rating);
+    void updateRating(String media, int rating);
 
     /**
      * Finds the media with the given rating value and stores it in a new

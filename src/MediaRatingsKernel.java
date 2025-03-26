@@ -48,6 +48,19 @@ public interface MediaRatingsKernel<String, Integer>
     MediaRatings.Pair<String, Integer> remove(String media);
 
     /**
+     * Removes any component and returns it.
+     *
+     * @return the pair removed
+     * @updates this
+     * @ensures <pre>
+     * remove.media = media  and
+     * remove is in #this  and
+     * this = #this \ {remove}
+     * </pre>
+     */
+    MediaRatings.Pair<String, Integer> removeAny();
+
+    /**
      * Reports the rating associated with {@code media} in {@code this}.
      *
      * @param media
