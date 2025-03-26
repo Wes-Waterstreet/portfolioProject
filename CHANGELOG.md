@@ -8,6 +8,17 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.03.25]
+
+### Added
+
+- Designed abstract class for MediaRatings component
+
+### Updated
+
+- Added removeAny() method to interface
+- Changed parameters for pair to String and Integer
+
 ## [2025.02.04]
 
 ### Added
