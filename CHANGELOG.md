@@ -8,6 +8,16 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.03.04]
+
+### Added
+
+- Designed kernel and enhanced interfaces for MediaRatings component
+
+### Updated
+
+- Changed desing to include allRatings and numberOfRatings methods
+
 ## [2025.02.20]
 
 ### Added
