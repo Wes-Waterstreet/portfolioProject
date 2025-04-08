@@ -3,14 +3,8 @@ import components.standard.Standard;
 /**
  * Media ratings kernel component with primary methods.
  *
- * @param <String>
- *            String entries for media
- * @param <Integer>
- *            Integer values for rating
  */
-@SuppressWarnings("hiding")
-public interface MediaRatingsKernel<String, Integer>
-        extends Standard<MediaRatings<String, Integer>> {
+public interface MediaRatingsKernel extends Standard<MediaRatings> {
     /**
      * A constant, with value 5, holding the max rating allowed.
      */

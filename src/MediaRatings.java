@@ -1,14 +1,8 @@
 /**
  * MediaRatings secondary methods.
- *
- * @param <String>
- *            String entries for media
- * @param <Integer>
- *            Integer values for rating
  */
-@SuppressWarnings("hiding")
-public interface MediaRatings<String, Integer>
-        extends MediaRatingsKernel<String, Integer> {
+
+public interface MediaRatings extends MediaRatingsKernel {
     /**
      * The pair of media and rating for the media ratings tracker.
      *
@@ -59,6 +53,6 @@ public interface MediaRatings<String, Integer>
      * @return new Media Ratings with only media of the given rating.
      *
      */
-    MediaRatings<String, Integer> allRatings(int rating);
+    MediaRatings allRatings(int rating);
 
 }
