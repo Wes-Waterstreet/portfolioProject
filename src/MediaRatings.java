@@ -2,35 +2,7 @@
  * MediaRatings secondary methods.
  */
 
-public interface MediaRatings extends MediaRatingsKernel {
-    /**
-     * The pair of media and rating for the media ratings tracker.
-     *
-     * @param <String>
-     *            String entries for media
-     * @param <Integer>
-     *            Integer values for rating
-     * @initially <pre>
-     * (String media, Integer rating):
-     *  ensures
-     *   this = (media, rating)
-     * </pre>
-     */
-    interface Pair<String, Integer> {
-        /**
-         * Returns the media for the pair.
-         *
-         * @return the media
-         */
-        String media();
-
-        /**
-         * Returns the rating for the pair.
-         *
-         * @return the rating
-         */
-        int rating();
-    }
+    public interface MediaRatings extends MediaRatingsKernel {
 
     /**
      * updates the old rating of the given media with the new rating.

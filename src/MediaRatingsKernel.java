@@ -10,6 +10,20 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
     int MAXRATING = 5;
 
     /**
+     * Returns the media for the pair.
+     *
+     * @return the media
+     */
+    String media();
+
+    /**
+     * Returns the rating for the pair.
+     *
+     * @return the rating
+     */
+    int rating();
+
+    /**
      * Adds the pair ({@code media}, {@code rating}) to this.
      *
      * @param media
