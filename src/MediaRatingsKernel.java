@@ -2,7 +2,6 @@ import components.standard.Standard;
 
 /**
  * Media ratings kernel component with primary methods.
- *
  */
 public interface MediaRatingsKernel extends Standard<MediaRatings> {
     /**
@@ -39,7 +38,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings.Pair<String, Integer> remove(String media);
+    MediaRatings remove(String media);
 
     /**
      * Removes any component and returns it.
@@ -52,7 +51,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings.Pair<String, Integer> removeAny();
+    MediaRatings removeAny();
 
     /**
      * Reports the rating associated with {@code media} in {@code this}.
