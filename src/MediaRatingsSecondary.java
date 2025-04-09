@@ -4,16 +4,16 @@
 public abstract class MediaRatingsSecondary implements MediaRatings {
 
     @Override
-    public void updateRating(String media, int rating) {
+    public final void updateRating(String media, int rating) {
         this.remove(media);
         this.add(media, rating);
     }
 
     @Override
-    public MediaRatings allRatings(int rating) {
+    public final MediaRatings allRatings(int rating) {
         MediaRatings result = this.newInstance();
         for (int i = 0; i < this.numberOfRatings(); i++) {
-            MediaRatings.Pair<String, Integer> temp = this.removeAny();
+            MediaRatings.Pair temp = this.removeAny();
             if (temp.rating() == rating) {
                 result.add(temp.media(), rating);
             }
@@ -23,59 +23,64 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String value = "";
-        int length = this.length();
+        int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
-            MediaRatings temp = this.removeAny();
+            MediaRatings.Pair temp = this.removeAny();
             value.concat("<");
-            value.concat(temp.media.toString());
+            value.concat(temp.media().toString());
             value.concat(", ");
-            value.concat(temp.rating.toString());
+            value.concat(String.valueOf(temp.rating()));
             value.concat(">");
-            value.concat(", ")
-            this.add(temp);
+            value.concat(", ");
+            this.add(temp.media(), temp.rating());
         }
         return value;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = 1;
-        int length = this.length();
+        int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
-            MediaRatings temp = this.removeAny();
-            result += (temp.media.hashCode());
-            this.add(temp);
+            MediaRatings.Pair temp = this.removeAny();
+            result += (temp.media().hashCode());
+            this.add(temp.media(), temp.rating());
         }
         return result;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
-        MediaRatings<T> obj = (MediaRatings<T>) o;
+        MediaRatings obj = (MediaRatings) o;
 
-        if (this.length() != obj.length()) {
+        if (this.numberOfRatings() != obj.numberOfRatings()) {
             return false;
         }
 
-        int length = this.length();
+        int length = this.numberOfRatings();
+        MediaRatings temp = this.newInstance();
+        temp.transferFrom(this);
         for (int i = 0; i < length; i++) {
-            MediaRatings thisItem = this.remove();
-            MediaRatings otherItem = obj.remove();
-            if (!thisItem.equals(otherItem)) {
+            MediaRatings.Pair thisPair = temp.removeAny();
+            if (!obj.hasMedia(thisPair.media())) {
                 return false;
             }
-            this.add(thisItem);
-            obj.add(otherItem);
+            MediaRatings.Pair objPair = obj.remove(thisPair.media());
+            if (!(objPair.rating() == (thisPair.rating()))) {
+                return false;
+            }
+            this.add(thisPair.media(), thisPair.rating());
+            obj.add(objPair.media(), objPair.rating());
         }
         return true;
     }
