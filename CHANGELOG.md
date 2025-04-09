@@ -8,6 +8,13 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.04.09]
+
+### Added
+
+- Designed kernel implementation for MediaRatings component
+
+
 ## [2025.03.25]
 
 ### Added
