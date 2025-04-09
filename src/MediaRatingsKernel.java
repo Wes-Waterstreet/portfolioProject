@@ -5,9 +5,14 @@ import components.standard.Standard;
  */
 public interface MediaRatingsKernel extends Standard<MediaRatings> {
     /**
-     * A constant, with value 5, holding the max rating allowed.
+     * A constant, with value 5, holding the maximum rating allowed.
      */
     int MAXRATING = 5;
+
+    /**
+     * A constant, with value 0, holding the minimum rating allowed.
+     */
+    int MINRATING = 0;
 
     /**
      * Adds the pair ({@code media}, {@code rating}) to this.
@@ -38,7 +43,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings remove(String media);
+    MediaRatings.Pair remove(String media);
 
     /**
      * Removes any component and returns it.
@@ -51,7 +56,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings removeAny();
+    MediaRatings.Pair removeAny();
 
     /**
      * Reports the rating associated with {@code media} in {@code this}.
