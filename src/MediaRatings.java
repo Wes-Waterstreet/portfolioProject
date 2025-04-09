@@ -1,8 +1,31 @@
 /**
  * MediaRatings secondary methods.
  */
+public interface MediaRatings extends MediaRatingsKernel {
+    /**
+     * The pair of media and rating for the media ratings tracker.
+     *
+     * @initially <pre>
+     * (String media, Integer rating):
+     *  ensures
+     *   this = (media, rating)
+     * </pre>
+     */
+    interface Pair {
+        /**
+         * Returns the media for the pair.
+         *
+         * @return the media
+         */
+        String media();
 
-    public interface MediaRatings extends MediaRatingsKernel {
+        /**
+         * Returns the rating for the pair.
+         *
+         * @return the rating
+         */
+        int rating();
+    }
 
     /**
      * updates the old rating of the given media with the new rating.
@@ -26,5 +49,17 @@
      *
      */
     MediaRatings allRatings(int rating);
+
+    /**
+     * Finds the media with the given rating value and stores it in a new
+     * tracker.
+     *
+     * @updates this
+     *
+     * @ensures entries(#this) = entries(this) and entries are sorted from
+     *          greatest rating to smallest rating.
+     *
+     */
+    void sortRatings();
 
 }
