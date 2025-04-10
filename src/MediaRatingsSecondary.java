@@ -10,7 +10,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     }
 
     @Override
-    public MediaRatings allRatings(int rating) {
+    public final MediaRatings allRatings(int rating) {
         MediaRatings result = this.newInstance();
         for (int i = 0; i < this.numberOfRatings(); i++) {
             MediaRatings.Pair temp = this.removeAny();
@@ -23,7 +23,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String value = "";
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
@@ -40,7 +40,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = 1;
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
@@ -52,7 +52,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) {
             return true;
         }
