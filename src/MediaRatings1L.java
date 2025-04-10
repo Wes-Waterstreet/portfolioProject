@@ -1,6 +1,5 @@
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * MediaRatings represented as a java.util.Map with implementations of primary
@@ -9,24 +8,73 @@ import java.util.Set;
  * @convention $this.Pair.media() != null and $this.Pair.rating() >= 0 and
  *             $this.Pair.rating() <= 5
  *
- * @correspondence this = [value of $this]
+ * @correspondence this = entries($this.rep)
  *
  */
 public class MediaRatings1L extends MediaRatingsSecondary {
+
     /*
      * Private Members
      */
 
     /**
+     * Elements included in {@code this}.
+     */
+    private final class MediaRating {
+
+        /**
+         * name of media.
+         */
+        private String media;
+
+        /**
+         * value of rating.
+         */
+        private int rating;
+    }
+
+    /**
      * Representation of this.
      */
-    private java.util.Map<String, Integer> rep;
+    private Queue<MediaRating> rep;
+
+    /**
+     * Finds pair with media and moves it to the front of q.
+     *
+     * @param q
+     *            the Queue to be searched
+     * @param media
+     *            the string to be searched for
+     * @updates q
+     * @ensures <pre>
+     * perms(q, #q)  and MediaRating where MediaRating.media = media is in the front
+     * </pre>
+     */
+    private static void moveToFront(Queue<MediaRating> q, String media) {
+        boolean check = false;
+        for (int i = 0; i < q.size(); i++) {
+            MediaRating temp = q.remove();
+            if (temp.media.equals(media)) {
+                check = true;
+            } else {
+                q.add(temp);
+            }
+            if (check) {
+                q.add(temp);
+                for (int j = 0; j < q.size() - 1; j++) {
+                    MediaRating temp3 = q.remove();
+                    q.add(temp3);
+                }
+            }
+        }
+
+    }
 
     /**
      * Creating initial representation.
      */
     private void createNewRep() {
-        this.rep = new HashMap<String, Integer>();
+        this.rep = new LinkedList<MediaRating>();
     }
 
     /*
@@ -82,47 +130,49 @@ public class MediaRatings1L extends MediaRatingsSecondary {
                 .hasMedia(media) : "Violation of: media is not in DOMAIN(this)";
         assert rating >= MINRATING : "Violation of: rating is not valid";
         assert rating <= MAXRATING : "Violation of: rating is not valid";
-        this.rep.put(media, rating);
+        MediaRating temp = new MediaRating();
+        temp.media = media;
+        temp.rating = rating;
+        this.rep.add(temp);
     }
 
     @Override
-    public final MediaRatings.Pair remove(String media) {
+    public final MediaRating remove(String media) {
         assert media != null : "Violation of: media is not null";
         assert this.hasMedia(media) : "Violation of: media is in DOMAIN(this)";
 
-        String mediaRemoved = null;
-        Set<String> allMedia = this.rep.keySet();
-        for (String x : allMedia) {
-            if (x.equals(media)) {
-                mediaRemoved = x;
-                break;
-            }
-        }
-        int ratingRemoved = this.rep.remove(mediaRemoved);
-        return new MediaRatings.Pair(mediaRemoved, ratingRemoved);
+        moveToFront(this.rep, media);
+        return this.rep.remove();
     }
 
     @Override
-    public final MediaRatings.Pair removeAny() {
+    public final MediaRating removeAny() {
         assert this.numberOfRatings() > 0 : "Violation of: this /= empty_set";
-        Iterator<java.util.Map.Entry<String, Integer>> it = this.rep.entrySet()
-                .iterator();
-        java.util.Map.Entry<String, Integer> entry = it.next();
-        it.remove();
-        return new MediaRatings.Pair(entry.getKey(), entry.getValue());
+
+        return this.rep.remove();
     }
 
     @Override
     public final int rating(String media) {
         assert media != null : "Violation of: media is not null";
         assert this.hasMedia(media) : "Violation of: media is in DOMAIN(this)";
-        return this.rep.get(media);
+        moveToFront(this.rep, media);
+        MediaRating result = this.rep.remove();
+        return result.rating;
     }
 
     @Override
     public final boolean hasMedia(String media) {
         assert media != null : "Violation of: media is not null";
-        return this.rep.containsKey(media);
+        boolean result = false;
+        for (int i = 0; i < this.rep.size(); i++) {
+            MediaRating temp = this.rep.remove();
+            if (temp.media.equals(media)) {
+                result = true;
+            }
+            this.rep.add(temp);
+        }
+        return result;
     }
 
     @Override
