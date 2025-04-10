@@ -2,8 +2,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import components.map.MapSecondary.SimplePair;
-
 /**
  * MediaRatings represented as a java.util.Map with implementations of primary
  * methods.
@@ -101,7 +99,7 @@ public class MediaRatings1L extends MediaRatingsSecondary {
             }
         }
         int ratingRemoved = this.rep.remove(mediaRemoved);
-        return new SimplePair(mediaRemoved, ratingRemoved);
+        return new MediaRatings.Pair(mediaRemoved, ratingRemoved);
     }
 
     @Override
@@ -111,7 +109,7 @@ public class MediaRatings1L extends MediaRatingsSecondary {
                 .iterator();
         java.util.Map.Entry<String, Integer> entry = it.next();
         it.remove();
-        return new SimplePair(entry.getKey(), entry.getValue());
+        return new MediaRatings.Pair(entry.getKey(), entry.getValue());
     }
 
     @Override
