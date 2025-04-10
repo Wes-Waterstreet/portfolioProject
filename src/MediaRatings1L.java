@@ -6,7 +6,8 @@ import java.util.Queue;
  * methods.
  *
  * @convention $this.Pair.media() != null and $this.Pair.rating() >= 0 and
- *             $this.Pair.rating() <= 5
+ *             $this.Pair.rating() <= 5 and MediaRating holds the string and
+ *             integer pair which is held in a queue
  *
  * @correspondence this = entries($this.rep)
  *
@@ -113,11 +114,6 @@ public class MediaRatings1L extends MediaRatingsSecondary {
         assert source != this : "Violation of: source is not this";
         assert source instanceof MediaRatings : ""
                 + "Violation of: source is of dynamic type Map1L<?,?>";
-        /*
-         * This cast cannot fail since the assert above would have stopped
-         * execution in that case: source must be of dynamic type Map2<?,?>, and
-         * the ?,? must be K,V or the call would not have compiled.
-         */
         MediaRatings1L localSource = (MediaRatings1L) source;
         this.rep = localSource.rep;
         localSource.createNewRep();
