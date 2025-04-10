@@ -11,7 +11,7 @@ public interface MediaRatings extends MediaRatingsKernel {
      *   this = (media, rating)
      * </pre>
      */
-    interface Pair {
+    interface MediaRating {
         /**
          * Returns the media for the pair.
          *

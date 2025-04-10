@@ -43,7 +43,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings.Pair remove(String media);
+    MediaRatings.MediaRating remove(String media);
 
     /**
      * Removes any component and returns it.
@@ -56,7 +56,7 @@ public interface MediaRatingsKernel extends Standard<MediaRatings> {
      * this = #this \ {remove}
      * </pre>
      */
-    MediaRatings.Pair removeAny();
+    MediaRatings.MediaRating removeAny();
 
     /**
      * Reports the rating associated with {@code media} in {@code this}.

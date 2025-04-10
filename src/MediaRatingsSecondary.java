@@ -13,7 +13,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
     public final MediaRatings allRatings(int rating) {
         MediaRatings result = this.newInstance();
         for (int i = 0; i < this.numberOfRatings(); i++) {
-            MediaRatings.Pair temp = this.removeAny();
+            MediaRatings.MediaRating temp = this.removeAny();
             if (temp.rating() == rating) {
                 result.add(temp.media(), rating);
             }
@@ -27,7 +27,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
         String value = "";
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
-            MediaRatings.Pair temp = this.removeAny();
+            MediaRatings.MediaRating temp = this.removeAny();
             value.concat("<");
             value.concat(temp.media().toString());
             value.concat(", ");
@@ -44,7 +44,7 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
         int result = 1;
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
-            MediaRatings.Pair temp = this.removeAny();
+            MediaRatings.MediaRating temp = this.removeAny();
             result += (temp.media().hashCode());
             this.add(temp.media(), temp.rating());
         }
@@ -71,11 +71,11 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
         MediaRatings temp = this.newInstance();
         temp.transferFrom(this);
         for (int i = 0; i < length; i++) {
-            MediaRatings.Pair thisPair = temp.removeAny();
+            MediaRatings.MediaRating thisPair = temp.removeAny();
             if (!obj.hasMedia(thisPair.media())) {
                 return false;
             }
-            MediaRatings.Pair objPair = obj.remove(thisPair.media());
+            MediaRatings.MediaRating objPair = obj.remove(thisPair.media());
             if (!(thisPair.rating() == (objPair.rating()))) {
                 return false;
             }
