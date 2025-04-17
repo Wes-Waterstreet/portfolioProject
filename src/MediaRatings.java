@@ -3,31 +3,6 @@
  */
 public interface MediaRatings extends MediaRatingsKernel {
     /**
-     * The pair of media and rating for the media ratings tracker.
-     *
-     * @initially <pre>
-     * (String media, Integer rating):
-     *  ensures
-     *   this = (media, rating)
-     * </pre>
-     */
-    interface MediaRating {
-        /**
-         * Returns the media for the pair.
-         *
-         * @return the media
-         */
-        String media();
-
-        /**
-         * Returns the rating for the pair.
-         *
-         * @return the rating
-         */
-        int rating();
-    }
-
-    /**
      * updates the old rating of the given media with the new rating.
      *
      * @param media

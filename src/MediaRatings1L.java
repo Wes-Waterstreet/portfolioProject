@@ -20,18 +20,14 @@ public class MediaRatings1L extends MediaRatingsSecondary {
 
     /**
      * Elements included in {@code this}.
+     *
+     * @param media
+     *            The media to be added
+     * @param rating
+     *            The rating to be added
      */
-    private final class MediaRating {
+    private record MediaRating(String media, int rating) {
 
-        /**
-         * name of media.
-         */
-        private String media;
-
-        /**
-         * value of rating.
-         */
-        private int rating;
     }
 
     /**
@@ -133,7 +129,7 @@ public class MediaRatings1L extends MediaRatingsSecondary {
     }
 
     @Override
-    public final MediaRating remove(String media) {
+    public final MediaRatings.MediaRating remove(String media) {
         assert media != null : "Violation of: media is not null";
         assert this.hasMedia(media) : "Violation of: media is in DOMAIN(this)";
 
@@ -142,7 +138,7 @@ public class MediaRatings1L extends MediaRatingsSecondary {
     }
 
     @Override
-    public final MediaRating removeAny() {
+    public final MediaRatings.MediaRating removeAny() {
         assert this.numberOfRatings() > 0 : "Violation of: this /= empty_set";
 
         return this.rep.remove();
@@ -153,8 +149,9 @@ public class MediaRatings1L extends MediaRatingsSecondary {
         assert media != null : "Violation of: media is not null";
         assert this.hasMedia(media) : "Violation of: media is in DOMAIN(this)";
         moveToFront(this.rep, media);
-        MediaRating result = this.rep.remove();
-        return result.rating;
+        MediaRating pair = this.rep.peek();
+        int result = pair.rating;
+        return result;
     }
 
     @Override
