@@ -1,5 +1,7 @@
-package components.mediaratings;
 
+import components.mediaratings.MediaRating;
+import components.mediaratings.MediaRatings;
+import components.mediaratings.MediaRatings1L;
 import components.simplewriter.SimpleWriter;
 import components.simplewriter.SimpleWriter1L;
 
