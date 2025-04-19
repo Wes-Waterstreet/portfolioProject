@@ -1,4 +1,5 @@
 package components.mediaratings;
+
 /**
  * Layered implementations of secondary methods for {@code MediaRatings}.
  */
@@ -25,24 +26,26 @@ public abstract class MediaRatingsSecondary implements MediaRatings {
 
     @Override
     public final String toString() {
-        String value = "";
+        StringBuilder value = new StringBuilder();
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
             MediaRating temp = this.removeAny();
-            value.concat("<");
-            value.concat(temp.media().toString());
-            value.concat(", ");
-            value.concat(String.valueOf(temp.rating()));
-            value.concat(">");
-            value.concat(", ");
+            value.append("<");
+            value.append(temp.media());
+            value.append(", ");
+            value.append(String.valueOf(temp.rating()));
+            value.append(">");
+            if (i + 1 != length) {
+                value.append(", ");
+            }
             this.add(temp.media(), temp.rating());
         }
-        return value;
+        return value.toString();
     }
 
     @Override
     public final int hashCode() {
-        int result = 1;
+        int result = 0;
         int length = this.numberOfRatings();
         for (int i = 0; i < length; i++) {
             MediaRating temp = this.removeAny();
