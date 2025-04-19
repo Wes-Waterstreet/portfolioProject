@@ -8,6 +8,18 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.04.19]
+
+### Added
+
+- Designed test suite for MediaRatings component
+- Designed two different use cases for MediaRatings component
+
+### Updated
+
+- Created record MediaRating for MediaRatings component
+- fixed toString() method
+
 ## [2025.04.09]
 
 ### Added
